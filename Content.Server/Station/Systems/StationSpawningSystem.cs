@@ -150,21 +150,50 @@ public sealed class StationSpawningSystem : SharedStationSpawningSystem
 
         var gearEquippedEv = new StartingGearEquippedEvent(entity.Value);
         RaiseLocalEvent(entity.Value, ref gearEquippedEv);
+        UpdateFlavorText(entity.Value, profile);
 
         if (profile != null)
         {
             _humanoidSystem.LoadProfile(entity.Value, profile);
             _metaSystem.SetEntityName(entity.Value, profile.Name);
-            if (profile.FlavorText != "" && _configurationManager.GetCVar(CCVars.FlavorText))
-                EnsureComp<DetailExaminableComponent>(entity.Value).Content = profile.FlavorText;
         }
 
         DoJobSpecials(job, entity.Value);
         _identity.QueueIdentityUpdate(entity.Value);
         return entity.Value;
     }
+    private void UpdateFlavorText(EntityUid uid, HumanoidCharacterProfile? profile)
+    {
+        if (profile == null)
+            return;
+
+        var detail = EnsureComp<DetailExaminableComponent>(uid);
+
+        if (!string.IsNullOrWhiteSpace(profile.FlavorText))
+            detail.Content = profile.FlavorText;
+
+        if (!string.IsNullOrWhiteSpace(profile.NsfwFlavorText))
+            detail.NsfwContent = profile.NsfwFlavorText;
+    }
+<<<<<<< HEAD
+    private void DoJobSpecials(JobComponent? job, EntityUid entity)
+=======
+    private void UpdateFlavorText(EntityUid uid, HumanoidCharacterProfile? profile)
+    {
+        if (profile == null)
+            return;
+
+        var detail = EnsureComp<DetailExaminableComponent>(uid);
+
+        if (!string.IsNullOrWhiteSpace(profile.FlavorText))
+            detail.Content = profile.FlavorText;
+
+        if (!string.IsNullOrWhiteSpace(profile.NsfwFlavorText))
+            detail.NsfwContent = profile.NsfwFlavorText;
+    }
 
     private void DoJobSpecials(JobComponent? job, EntityUid entity)
+>>>>>>> 0d336426ad (NSFW Flavor Text (#1413))
     {
         if (!_prototypeManager.TryIndex(job?.Prototype ?? string.Empty, out JobPrototype? prototype))
             return;
