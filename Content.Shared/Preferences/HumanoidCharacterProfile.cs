@@ -60,6 +60,10 @@ public sealed partial class HumanoidCharacterProfile : ICharacterProfile
     [DataField]
     public string FlavorText { get; set; } = string.Empty;
 
+    /// Detailed text that can appear for the character if <see cref="CCVars.FlavorText"/> and the viewer consent is enabled
+    [DataField]
+    public string NsfwFlavorText { get; set; } = string.Empty;
+
     /// Associated <see cref="SpeciesPrototype"/> for this profile
     [DataField]
     public string Species { get; set; } = SharedHumanoidAppearanceSystem.DefaultSpecies;
@@ -118,7 +122,8 @@ public sealed partial class HumanoidCharacterProfile : ICharacterProfile
 
     public HumanoidCharacterProfile(
         string name,
-        string flavortext,
+        string flavorText,
+        string nsfwFlavorText,
         string species,
         string customspeciename,
         float height,
@@ -140,7 +145,8 @@ public sealed partial class HumanoidCharacterProfile : ICharacterProfile
         string? favoriteDrink)
     {
         Name = name;
-        FlavorText = flavortext;
+        FlavorText = flavorText;
+        NsfwFlavorText = nsfwFlavorText;
         Species = species;
         Customspeciename = customspeciename;
         Height = height;
@@ -167,6 +173,7 @@ public sealed partial class HumanoidCharacterProfile : ICharacterProfile
         : this(
             other.Name,
             other.FlavorText,
+            other.NsfwFlavorText,
             other.Species,
             other.Customspeciename,
             other.Height,
@@ -266,6 +273,7 @@ public sealed partial class HumanoidCharacterProfile : ICharacterProfile
 
     public HumanoidCharacterProfile WithName(string name) => new(this) { Name = name };
     public HumanoidCharacterProfile WithFlavorText(string flavorText) => new(this) { FlavorText = flavorText };
+    public HumanoidCharacterProfile WithNSFWFlavorText(string flavorText) => new(this) { NsfwFlavorText = flavorText};
     public HumanoidCharacterProfile WithAge(int age) => new(this) { Age = age };
     public HumanoidCharacterProfile WithSex(Sex sex) => new(this) { Sex = sex };
     public HumanoidCharacterProfile WithGender(Gender gender) => new(this) { Gender = gender };
@@ -371,6 +379,17 @@ public sealed partial class HumanoidCharacterProfile : ICharacterProfile
             && FlavorText == other.FlavorText
             // Floof
             && FavoriteDrink == other.FavoriteDrink;
+            && (CDCharacterRecords == null || other.CDCharacterRecords == null
+                || CDCharacterRecords.MemberwiseEquals(other.CDCharacterRecords))
+            // DEN additions below
+            && Customspeciename == other.Customspeciename
+            && Height == other.Height
+            && Width == other.Width
+            && DisplayPronouns == other.DisplayPronouns
+            && StationAiName == other.StationAiName
+            && CyborgName == other.CyborgName;
+
+        return result;
     }
 
     public void EnsureValid(ICommonSession session, IDependencyCollection collection)
