@@ -99,6 +99,8 @@
     id: LoadoutOuterCoatAcidRaincoatMagenta
   - type: loadout
     id: LoadoutOuterCoatAcidRaincoatYellow
+  - type: loadout
+    id: LoadoutPirateCoat
   # start Floof
   - type: loadout
     id: LoadoutOuterPlagueSuit
