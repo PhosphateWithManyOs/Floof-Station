@@ -7,5 +7,5 @@
 flavor-text-title = Safe for Work
 flavor-text-nsfw-title = Not Safe for Work
 
-flavor-text-placeholder = A more detailed description of your character, not specifically appearance. Must not contain NSFW content.
+flavor-text-placeholder = An outer description of your character that others can get by looking at them... # left the floof/default descrption, though I'll change if needed
 flavor-text-nsfw-placeholder = A more detailed description of your character, not specifically appearance. NSFW content is fine.

@@ -542,9 +542,8 @@ namespace Content.Client.Lobby.UI
                 _flavorNsfwTextEdit?.Dispose();
 
                 _flavorText = null;
-                _flavorSfwTextEdit = null;
-                _flavorNsfwTextEdit = null;
-                //_flavorTextEdit = null;
+                _flavorTextEdit = null;
+                _flavorTextEdit = null;
             }
         }
 
