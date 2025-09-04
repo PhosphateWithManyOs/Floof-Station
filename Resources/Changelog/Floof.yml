@@ -7688,3 +7688,10 @@ Entries:
   id: 813
   time: '2025-09-02T16:42:47.0000000+00:00'
   url: https://github.com/Floof-Station/Floof-Station/pull/1374
+- author: Mudyin
+  changes:
+    - type: Add
+      message: Added Talos a new mid pop map.
+  id: 814
+  time: '2025-09-03T02:21:49.0000000+00:00'
+  url: https://github.com/Floof-Station/Floof-Station/pull/1235
